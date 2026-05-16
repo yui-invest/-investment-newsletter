@@ -353,17 +353,32 @@ footer a{color:#64748b;}
 </footer>
 
 <script>
-function handleSignup(e){
+async function handleSignup(e){
   e.preventDefault();
   const name=document.getElementById('nameInput').value;
   const email=document.getElementById('emailInput').value;
-  const sub=encodeURIComponent('【登録希望】はじめての投資レポート');
-  const body=encodeURIComponent(`お名前: ${name}\nメールアドレス: ${email}\n\n上記のアドレスでニュースレターへの登録をお願いします。`);
-  window.location.href=`mailto:toraworkplace@gmail.com?subject=${sub}&body=${body}`;
-  setTimeout(()=>{
-    document.getElementById('signupForm').style.display='none';
-    document.getElementById('successArea').style.display='block';
-  },600);
+  const btn=document.querySelector('.submit-btn');
+  btn.textContent='送信中…';
+  btn.disabled=true;
+  try{
+    const res=await fetch('https://formspree.io/f/mdabqqvj',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,_subject:'【登録希望】はじめての投資レポート'})
+    });
+    if(res.ok){
+      document.getElementById('signupForm').style.display='none';
+      document.getElementById('successArea').style.display='block';
+    }else{
+      btn.textContent='🚀 無料で登録する（30秒）';
+      btn.disabled=false;
+      alert('送信に失敗しました。もう一度お試しください。');
+    }
+  }catch(err){
+    btn.textContent='🚀 無料で登録する（30秒）';
+    btn.disabled=false;
+    alert('通信エラーが発生しました。もう一度お試しください。');
+  }
 }
 // スムーズスクロール
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
