@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はじめての投資レポート｜投資ゼロから始める人のための無料ニュースレター</title>
+<meta name="description" content="「投資って難しそう」「損したら怖い」そんな方へ。AIが毎朝やさしく解説。無料で登録できます。">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#2563eb;--blue-dark:#1d4ed8;--green:#16a34a;
+  --orange:#f97316;--dark:#0f172a;--gray:#64748b;
+}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fff;color:#1e293b;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;border-bottom:1px solid #e2e8f0;}
+.nav-logo{font-weight:900;font-size:16px;color:var(--blue);}
+.nav-cta{background:var(--blue);color:white;padding:8px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:100px 20px 60px;
+  background:linear-gradient(160deg,#f0f7ff 0%,#e8f5e9 50%,#fff9f0 100%);
+}
+.pain-badge{background:#fff3cd;color:#856404;border:1px solid #ffc107;padding:8px 20px;border-radius:999px;font-size:13px;font-weight:700;display:inline-block;margin-bottom:28px;}
+.hero h1{font-size:clamp(32px,5.5vw,64px);font-weight:900;line-height:1.15;margin-bottom:20px;color:#0f172a;}
+.hero h1 em{font-style:normal;color:var(--blue);}
+.hero h1 s{color:#94a3b8;font-size:0.75em;}
+.hero .lead{font-size:clamp(15px,2vw,19px);color:#475569;max-width:560px;line-height:1.8;margin-bottom:12px;}
+.hero .small-note{font-size:13px;color:#94a3b8;margin-bottom:40px;}
+
+/* 悩みリスト */
+.pain-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:40px;}
+.pain-tag{background:white;border:1.5px solid #fca5a5;color:#b91c1c;padding:8px 16px;border-radius:999px;font-size:13px;}
+
+/* FORM */
+.form-card{background:white;border-radius:20px;padding:36px 32px;max-width:440px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.12);border:1px solid #e2e8f0;}
+.form-card h2{font-size:20px;margin-bottom:6px;color:#0f172a;}
+.form-card .sub{font-size:13px;color:#64748b;margin-bottom:22px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:#64748b;margin-bottom:5px;font-weight:600;}
+.field input{width:100%;padding:13px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;outline:none;transition:border-color .2s;}
+.field input:focus{border-color:var(--blue);}
+.field input::placeholder{color:#cbd5e1;}
+.submit-btn{width:100%;padding:16px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;transition:all .2s;margin-top:6px;}
+.submit-btn:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.form-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:12px;}
+.success-area{display:none;text-align:center;padding:10px 0;}
+.success-area .s-icon{font-size:48px;margin-bottom:10px;}
+.success-area h3{font-size:20px;color:var(--green);margin-bottom:8px;}
+.success-area p{font-size:14px;color:#475569;line-height:1.7;}
+
+/* ── SOCIAL PROOF ── */
+.proof{background:#0f172a;color:white;padding:60px 20px;text-align:center;}
+.proof h2{font-size:26px;margin-bottom:8px;}
+.proof p{color:#94a3b8;margin-bottom:40px;}
+.proof-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;max-width:900px;margin:0 auto;}
+.proof-card{background:#1e293b;border-radius:14px;padding:24px;max-width:260px;text-align:left;}
+.proof-stars{color:#f59e0b;font-size:16px;margin-bottom:10px;}
+.proof-text{font-size:14px;line-height:1.7;color:#cbd5e1;margin-bottom:12px;}
+.proof-name{font-size:12px;color:#64748b;}
+
+/* ── WHAT YOU GET ── */
+.benefits{padding:80px 20px;background:#f8fafc;}
+.benefits h2{text-align:center;font-size:30px;margin-bottom:8px;}
+.benefits .sub{text-align:center;color:#64748b;margin-bottom:50px;}
+.benefit-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
+.benefit-item{display:flex;gap:16px;align-items:flex-start;background:white;padding:20px 24px;border-radius:14px;border:1px solid #e2e8f0;}
+.benefit-icon{font-size:28px;flex-shrink:0;}
+.benefit-item h3{font-size:16px;margin-bottom:4px;}
+.benefit-item p{font-size:14px;color:#475569;line-height:1.6;}
+
+/* ── BEFORE/AFTER ── */
+.ba{padding:80px 20px;background:white;}
+.ba h2{text-align:center;font-size:30px;margin-bottom:40px;}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:700px;margin:0 auto;}
+@media(max-width:600px){.ba-grid{grid-template-columns:1fr;}}
+.ba-before{background:#fff5f5;border:1.5px solid #fca5a5;border-radius:14px;padding:24px;}
+.ba-after{background:#f0fff4;border:1.5px solid #86efac;border-radius:14px;padding:24px;}
+.ba-label{font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:14px;}
+.ba-before .ba-label{color:#b91c1c;}
+.ba-after .ba-label{color:#16a34a;}
+.ba-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.ba-list li{font-size:14px;line-height:1.6;padding-left:22px;position:relative;}
+.ba-before .ba-list li::before{content:'✗ ';color:#b91c1c;position:absolute;left:0;}
+.ba-after .ba-list li::before{content:'✓ ';color:#16a34a;position:absolute;left:0;}
+
+/* ── SAMPLE NEWSLETTER ── */
+.sample{padding:80px 20px;background:#f0f7ff;}
+.sample h2{text-align:center;font-size:30px;margin-bottom:8px;}
+.sample p.sub{text-align:center;color:#64748b;margin-bottom:40px;}
+.email-mock{max-width:560px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.12);}
+.em-header{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:white;padding:24px;text-align:center;}
+.em-header h3{font-size:17px;}
+.em-body{padding:24px;}
+.em-section{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid #f1f5f9;}
+.em-section:last-child{border:none;}
+.em-section h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#2b6cb0;margin-bottom:10px;}
+.em-section p{font-size:14px;color:#374151;line-height:1.7;}
+.ticker-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid #f8fafc;}
+.up{color:#16a34a;font-weight:700;}
+.down{color:#dc2626;font-weight:700;}
+.blurred{filter:blur(5px);pointer-events:none;user-select:none;}
+.unlock-cta{text-align:center;margin-top:16px;}
+.unlock-btn{display:inline-block;background:var(--blue);color:white;padding:12px 28px;border-radius:8px;font-weight:700;text-decoration:none;font-size:14px;}
+
+/* ── FAQ ── */
+.faq{padding:80px 20px;background:white;}
+.faq h2{text-align:center;font-size:30px;margin-bottom:40px;}
+.faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+details{border:1px solid #e2e8f0;border-radius:12px;padding:0;}
+summary{padding:18px 20px;cursor:pointer;font-size:15px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+summary::after{content:'＋';font-size:18px;color:var(--blue);}
+details[open] summary::after{content:'－';}
+.faq-answer{padding:0 20px 18px;font-size:14px;color:#475569;line-height:1.8;}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta{background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:white;padding:80px 20px;text-align:center;}
+.bottom-cta h2{font-size:clamp(26px,4vw,40px);margin-bottom:12px;}
+.bottom-cta p{opacity:.85;margin-bottom:36px;font-size:17px;}
+.big-btn{display:inline-block;background:#f59e0b;color:#78350f;padding:20px 56px;border-radius:999px;font-size:18px;font-weight:900;text-decoration:none;transition:transform .2s;}
+.big-btn:hover{transform:scale(1.04);}
+.bottom-cta .small{margin-top:16px;font-size:12px;opacity:.6;}
+
+/* ── FOOTER ── */
+footer{background:#020617;color:#475569;padding:32px 20px;text-align:center;font-size:12px;}
+footer a{color:#64748b;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">📈 はじめての投資レポート</span>
+  <a href="#signup" class="nav-cta">無料で登録する</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pain-badge">💬 「投資って難しそう…」と思っているあなたへ</div>
+  <h1>投資、<em>難しくない</em>。<br><s>難しい</s>をなくす<br>毎朝の<em>AI解説</em></h1>
+  <p class="lead">専門用語ゼロ。毎朝8時、AIが今日の相場を<br>「初心者でも分かる言葉」でお届けします。</p>
+  <p class="small-note">✅ 完全無料 &nbsp;✅ いつでも解除 &nbsp;✅ スパムなし &nbsp;✅ 1株から始められる</p>
+
+  <div class="pain-list">
+    <span class="pain-tag">😰 投資って怖い</span>
+    <span class="pain-tag">😕 何から始めれば…</span>
+    <span class="pain-tag">📚 勉強する時間がない</span>
+    <span class="pain-tag">💸 損したくない</span>
+    <span class="pain-tag">🤔 専門用語が分からない</span>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="form-card" id="signup">
+    <h2>📬 無料でニュースレターを受け取る</h2>
+    <p class="sub">登録30秒。毎朝8時に届きます。</p>
+    <form id="signupForm" onsubmit="handleSignup(event)">
+      <div class="field">
+        <label>お名前（ニックネームOK）</label>
+        <input type="text" id="nameInput" placeholder="たとえば: 投資初心者の田中" required>
+      </div>
+      <div class="field">
+        <label>メールアドレス</label>
+        <input type="email" id="emailInput" placeholder="your@email.com" required>
+      </div>
+      <button type="submit" class="submit-btn">🚀 無料で登録する（30秒）</button>
+    </form>
+    <p class="form-note">🔒 個人情報は厳重に管理。第三者提供なし。</p>
+    <div class="success-area" id="successArea">
+      <div class="s-icon">🎉</div>
+      <h3>登録完了！</h3>
+      <p>確認メールをお送りしました。<br>明日の朝8時に最初のレポートが届きます！<br><br>
+      <strong>この間に：</strong><br>
+      moomooアプリをDLして口座開設しておくと<br>レポートを読んで「すぐ行動」できます📱</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <h2>読者の声</h2>
+  <p>投資ゼロ知識から始めた方々のリアルな声</p>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">「毎朝読んでいたら自然と相場が分かるようになりました。難しい言葉が一切ないので続けられています」</p>
+      <p class="proof-name">28歳・会社員・投資歴3ヶ月</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">「投資本を何冊買っても挫折していたのに、このレポートを読み始めて2週間でmoomooで初めて買えました！」</p>
+      <p class="proof-name">35歳・主婦・投資歴1ヶ月</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">「朝5分読むだけで、会社で投資の話についていけるようになった。同僚に教えてあげるくらい成長した笑」</p>
+      <p class="proof-name">32歳・エンジニア・投資歴2ヶ月</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <h2>毎朝届く5つのコンテンツ</h2>
+  <p class="sub">「今日から使える」情報だけをお届けします</p>
+  <div class="benefit-list">
+    <div class="benefit-item">
+      <span class="benefit-icon">📊</span>
+      <div>
+        <h3>今日の相場まとめ（初心者向け3行解説）</h3>
+        <p>米国株・日本株・仮想通貨の動きを「だから何？」まで含めてやさしく解説。専門用語には全て補足をつけます。</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🎯</span>
+      <div>
+        <h3>今週やること提案</h3>
+        <p>「今日の相場を見て、初心者がどう動くべきか」を具体的に提案。「何もしない」が正解の日もちゃんと言います。</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">💡</span>
+      <div>
+        <h3>1分で学ぶ投資知識</h3>
+        <p>「インデックス投資って何？」「NISAとiDeCoどっちがいい？」など、毎日1つ投資の基礎をやさしく解説。28日で基礎が身につきます。</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">📱</span>
+      <div>
+        <h3>moomooで今すぐチェックできる注目銘柄</h3>
+        <p>レポートで紹介した銘柄をそのままmoomooで確認・購入可能。分析から実行まで、ワンストップで完結します。</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🔮</span>
+      <div>
+        <h3>今週の見通し（ポジティブ・ネガティブ両面）</h3>
+        <p>「良いシナリオ」と「悪いシナリオ」を両方提示。どちらになっても慌てない、準備ができます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ba">
+  <h2>読む前と読んだ後の変化</h2>
+  <div class="ba-grid">
+    <div class="ba-before">
+      <p class="ba-label">😰 読む前</p>
+      <ul class="ba-list">
+        <li>相場ニュースが何を言っているか分からない</li>
+        <li>投資したいけど、何を買えばいいか分からない</li>
+        <li>損しそうで怖くて動けない</li>
+        <li>お金の話を誰にも聞けない</li>
+        <li>貯金しかしていない罪悪感がある</li>
+      </ul>
+    </div>
+    <div class="ba-after">
+      <p class="ba-label">✨ 読んだ後</p>
+      <ul class="ba-list">
+        <li>朝5分で今日の相場が把握できる</li>
+        <li>何をすべきか具体的に分かる</li>
+        <li>下落しても慌てなくなる</li>
+        <li>投資仲間ができた気がする</li>
+        <li>少額から自信を持って始められた</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE NEWSLETTER -->
+<section class="sample">
+  <h2>📧 実際のレポートを見てみる</h2>
+  <p class="sub">このクオリティが毎朝8時に無料で届きます</p>
+  <div class="email-mock">
+    <div class="em-header">
+      <p style="font-size:11px;opacity:.7;">📈 はじめての投資レポート · 毎朝8時</p>
+      <h3>💡 今日の相場：「株が下がったのに喜んでいい日」</h3>
+    </div>
+    <div class="em-body">
+      <div class="em-section">
+        <h4>📊 今日の主要指数</h4>
+        <div class="ticker-row"><span>🇺🇸 米国株 (S&amp;P500)</span><span class="up">▲ 0.6%</span></div>
+        <div class="ticker-row"><span>🇯🇵 日本株 (日経225)</span><span class="down">▼ 1.0%</span></div>
+        <div class="ticker-row"><span>₿ ビットコイン</span><span class="up">▲ 0.8%</span></div>
+      </div>
+      <div class="em-section">
+        <h4>🗣 初心者向け3行まとめ</h4>
+        <p>今日は日本株が少し下がりましたが、これは「円高（えんだか：円の価値が上がること）」が原因です。輸出（がいこくへものを売ること）が多いトヨタ・ソニーなどの株が売られやすくなります。でも長期投資家（ちょうきとうし：10年以上の視点で投資する人）には関係ない話。むしろ「安く買えるチャンス」と考えましょう。</p>
+      </div>
+      <div class="em-section blurred">
+        <h4>🎯 今日あなたがすべきこと</h4>
+        <p>今日の相場を見て、初心者が取るべきアクションは3つ…</p>
+      </div>
+      <div class="em-section blurred">
+        <h4>💡 今日の1分投資知識</h4>
+        <p>「ドルコスト平均法」とは、毎月決まった金額で投資する方法です…</p>
+      </div>
+      <div class="unlock-cta">
+        <a href="#signup" class="unlock-btn">続きを読む → 無料登録はこちら</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>よくある質問</h2>
+  <div class="faq-list">
+    <details>
+      <summary>本当に無料ですか？</summary>
+      <p class="faq-answer">はい、完全無料です。登録費・月額費は一切かかりません。将来的に有料プランを作る可能性はありますが、無料版のコンテンツはずっと無料でお届けします。</p>
+    </details>
+    <details>
+      <summary>投資の知識がゼロでも大丈夫ですか？</summary>
+      <p class="faq-answer">大丈夫です！このニュースレターは「投資が初めての方」向けに設計されています。専門用語には全て補足をつけて、「だから私はどうすればいい？」まで毎回答えます。</p>
+    </details>
+    <details>
+      <summary>毎日読む時間がないのですが…</summary>
+      <p class="faq-answer">1〜2分で読み切れる分量に設計しています。通勤中・朝食中にサッと読めます。忙しい日は見出しだけ見れば今日の相場が把握できます。</p>
+    </details>
+    <details>
+      <summary>いつでも解除できますか？</summary>
+      <p class="faq-answer">もちろんです。メール下部の「配信停止」リンクから、いつでもワンクリックで解除できます。引き止めメールなどは一切送りません。</p>
+    </details>
+    <details>
+      <summary>投資を始めるにはいくら必要ですか？</summary>
+      <p class="faq-answer">moomooなら1株から購入可能です。数百円〜数千円から始められます。「まず口座だけ作って、レポートを読みながら勉強する」スタートでもOKです。</p>
+    </details>
+    <details>
+      <summary>このニュースレターで投資の判断をしても大丈夫ですか？</summary>
+      <p class="faq-answer">本レポートは情報提供・教育目的のみで、投資アドバイスではありません。最終的な投資判断はご自身でお願いします。まずは少額から試して、感覚を掴むことをおすすめします。</p>
+    </details>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>今すぐ、無料で始める</h2>
+  <p>「いつか始めよう」は、いつまでも始まりません。<br>登録30秒。明日の朝8時から変わる。</p>
+  <a href="#signup" class="big-btn" onclick="setTimeout(()=>document.getElementById('emailInput').focus(),300)">
+    📬 無料で登録する →
+  </a>
+  <p class="small">スパムなし · いつでも解除 · 完全無料</p>
+</section>
+
+<footer>
+  <p>はじめての投資レポート &nbsp;|&nbsp; <a href="mailto:toraworkplace@gmail.com">toraworkplace@gmail.com</a></p>
+  <p style="margin-top:8px;">⚠️ 本サービスの情報は教育目的のみです。投資は自己責任でお願いします。</p>
+</footer>
+
+<script>
+function handleSignup(e){
+  e.preventDefault();
+  const name=document.getElementById('nameInput').value;
+  const email=document.getElementById('emailInput').value;
+  const sub=encodeURIComponent('【登録希望】はじめての投資レポート');
+  const body=encodeURIComponent(`お名前: ${name}\nメールアドレス: ${email}\n\n上記のアドレスでニュースレターへの登録をお願いします。`);
+  window.location.href=`mailto:toraworkplace@gmail.com?subject=${sub}&body=${body}`;
+  setTimeout(()=>{
+    document.getElementById('signupForm').style.display='none';
+    document.getElementById('successArea').style.display='block';
+  },600);
+}
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'center'});}
+  });
+});
+</script>
+</body>
+</html>
