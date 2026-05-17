@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>はじめての投資レポート｜投資ゼロから始める人のための無料ニュースレター</title>
 <meta name="description" content="「投資って難しそう」「損したら怖い」そんな方へ。AIが毎朝やさしく解説。無料で登録できます。">
+<!-- Google tag (gtag.js) — GA4_MEASUREMENT_ID を取得後に G-S4PJS4B4K3 を書き換える -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4PJS4B4K3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S4PJS4B4K3');
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -369,6 +377,8 @@ async function handleSignup(e){
     if(res.ok){
       document.getElementById('signupForm').style.display='none';
       document.getElementById('successArea').style.display='block';
+      // GA4 コンバージョンイベント
+      if(typeof gtag !== 'undefined') gtag('event', 'sign_up', {method: 'email', email: email});
     }else{
       btn.textContent='🚀 無料で登録する（30秒）';
       btn.disabled=false;
